@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portofolio Agi Lano I'Hertiansyah — Software Developer, web application, PWA, dan proyek IoT." />
+  <title>Agi Lano I'Hertiansyah | Portfolio</title>
+  <style>
+    :root {
+      --bg: #f5f7fb; --surface: #fff; --ink: #172033; --muted: #657089;
+      --line: #e3e8f1; --accent: #3568e8; --accent-soft: #eaf0ff;
+      --dark: #111a2d; --radius: 20px; --shadow: 0 14px 38px rgba(20, 34, 65, .07);
+    }
+    * { box-sizing: border-box; }
+    .project-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+    .project-gallery img { width: 100%; height: 170px; object-fit: cover; border-radius: 12px; border: 1px solid var(--line); background: #eef1f7; cursor: zoom-in; }
+    @media (max-width: 560px) { .project-gallery img { height: 125px; } }
+
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Arial, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, calc(100% - 40px)); margin: 0 auto; }
+    header { position: sticky; top: 0; z-index: 10; background: rgba(245,247,251,.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(227,232,241,.8); }
+    .nav { display: flex; align-items: center; justify-content: space-between; min-height: 72px; gap: 24px; }
+    .brand { font-weight: 800; letter-spacing: -.04em; }
+    .brand span { color: var(--accent); }
+    nav { display: flex; gap: 24px; align-items: center; font-size: .92rem; color: var(--muted); }
+    nav a:hover { color: var(--accent); }
+    .button { display: inline-flex; align-items: center; justify-content: center; padding: 12px 18px; border-radius: 12px; background: var(--accent); color: white; font-weight: 700; border: 1px solid var(--accent); transition: .2s; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(53,104,232,.22); }
+    .button.secondary { color: var(--ink); background: white; border-color: var(--line); }
+    .hero { padding: 86px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: 1.45fr .8fr; gap: 48px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; color: var(--accent); font-weight: 750; font-size: .85rem; text-transform: uppercase; letter-spacing: .1em; }
+    .eyebrow:before { content: ""; width: 24px; height: 2px; background: var(--accent); }
+    h1 { margin: 16px 0 18px; font-size: clamp(2.5rem, 5.4vw, 4.5rem); line-height: 1.07; letter-spacing: -.06em; }
+    h1 span { color: var(--accent); }
+    .lead { max-width: 650px; font-size: 1.12rem; color: var(--muted); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-card { background: var(--dark); color: white; border-radius: 26px; padding: 28px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+    .hero-card:after { content: ""; position: absolute; width: 210px; height: 210px; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; right: -80px; top: -85px; box-shadow: 0 0 0 25px rgba(255,255,255,.03), 0 0 0 55px rgba(255,255,255,.025); }
+    .hero-card .label { color: #a9b9dc; font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+    .hero-card h2 { margin: 8px 0 16px; font-size: 1.6rem; line-height: 1.25; letter-spacing: -.03em; }
+    .mini-list { display: grid; gap: 12px; margin-top: 22px; }
+    .mini-list div { display: flex; justify-content: space-between; gap: 16px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.13); color: #d4def3; font-size: .9rem; }
+    section { padding: 58px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 28px; }
+    .section-kicker { color: var(--accent); font-size: .8rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h2.section-title { margin: 6px 0 0; font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -.045em; line-height: 1.2; }
+    .section-desc { max-width: 520px; color: var(--muted); margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 22px; }
+    .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+    .panel p { margin-top: 0; color: var(--muted); }
+    .stat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+    .stat { padding: 18px; border-radius: 15px; background: var(--accent-soft); }
+    .stat strong { display: block; color: var(--accent); font-size: 1.3rem; }
+    .stat span { color: var(--muted); font-size: .85rem; }
+    .projects { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+    .project { display: flex; flex-direction: column; min-height: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 25px; box-shadow: var(--shadow); }
+    .project-top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+    .project-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-weight: 900; font-size: 1.1rem; flex-shrink: 0; }
+    .tag { display: inline-block; border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; color: var(--muted); font-size: .75rem; font-weight: 700; }
+    .project h3 { margin: 18px 0 8px; font-size: 1.2rem; letter-spacing: -.02em; }
+    .project p { color: var(--muted); margin: 0 0 18px; }
+    .project ul { color: var(--muted); padding-left: 19px; margin: 0 0 20px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; }
+    .chip { background: #f1f4f9; border-radius: 8px; padding: 6px 9px; font-size: .77rem; color: #44516b; font-weight: 650; }
+    .project-links { display: flex; gap: 14px; margin-top: 18px; font-size: .88rem; font-weight: 750; color: var(--accent); }
+    .project-links .muted-link { color: var(--muted); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+    .skill-group h3 { margin: 0 0 14px; font-size: 1rem; }
+    .skill-group .chips { margin-top: 0; }
+    .timeline { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .timeline-item { border-left: 3px solid var(--accent); padding: 4px 0 4px 18px; }
+    .timeline-item strong { display: block; }
+    .timeline-item span { color: var(--muted); font-size: .9rem; }
+    .contact { background: var(--dark); color: white; border-radius: 26px; padding: 38px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .contact p { color: #b7c3dc; margin-bottom: 0; }
+    .contact h2 { margin: 0; font-size: 2rem; letter-spacing: -.04em; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .contact-links a { padding: 10px 13px; border: 1px solid rgba(255,255,255,.2); border-radius: 10px; color: white; font-size: .88rem; }
+    footer { padding: 26px 0 34px; color: var(--muted); font-size: .85rem; text-align: center; }
+    @media (max-width: 800px) {
+      .hero-grid, .about-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 56px; }
+      .projects, .skills-grid, .timeline { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .contact { flex-direction: column; align-items: flex-start; }
+      nav { gap: 13px; font-size: .82rem; }
+      .nav .button { display: none; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(100% - 28px, 1100px); }
+      .nav { min-height: 62px; }
+      nav a:nth-child(2), nav a:nth-child(4) { display: none; }
+      .hero-card, .panel, .project, .contact { padding: 22px; }
+      section { padding: 42px 0; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">AGI<span>.</span></a>
+    <nav aria-label="Navigasi utama">
+      <a href="#about">Tentang</a><a href="#projects">Proyek</a><a href="#skills">Keahlian</a><a href="#education">Pendidikan</a>
+    </nav>
+    <a class="button" href="#contact">Hubungi Saya</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">IT & Digital Solutions · Portfolio</div>
+        <h1>Menghubungkan teknologi dengan <span>kebutuhan nyata.</span></h1>
+        <p class="lead">Saya Agi Lano I'Hertiansyah, lulusan Teknik Informatika dengan pengalaman membangun aplikasi web dan PWA, mendukung kebutuhan operasional, mengolah informasi, serta mengeksplorasi teknologi IoT. Saya terbuka pada peluang kerja yang sesuai dengan kemampuan teknis, komunikasi, dan produktivitas saya.</p>
+        <div class="hero-actions">
+          <a class="button" href="#projects">Lihat Proyek</a>
+          <a class="button secondary" href="mailto:agilanoihertiansyah01@gmail.com">Email Saya</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <div class="label">Fokus Utama</div>
+        <h2>IT, digital workflows, and practical solutions.</h2>
+        <p style="color:#b7c3dc;margin:0">Mendukung kebutuhan kerja melalui pengembangan sistem, pengelolaan informasi, dan penggunaan tools digital.</p>
+        <div class="mini-list">
+          <div><span>Web & PWA</span><strong>Development</strong></div>
+          <div><span>Database</span><strong>Integration</strong></div>
+          <div><span>IoT</span><strong>Prototyping</strong></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="section-kicker">Tentang Saya</div><h2 class="section-title">Teknologi yang menjawab kebutuhan.</h2></div>
+        <p class="section-desc">Saya tertarik membangun sistem yang membantu pencatatan, pemantauan, dan alur kerja menjadi lebih efisien.</p>
+      </div>
+      <div class="about-grid">
+        <div class="panel">
+          <p>Saya memiliki pengalaman mengembangkan aplikasi web dan PWA untuk pelaporan harian serta pengelolaan persediaan. Saya juga mengerjakan proyek dashboard, otomatisasi berita, aplikasi mobile sebagai proyek akademik, dan prototipe IoT.</p>
+          <p>Dalam proses pengembangan, saya berupaya menyusun solusi yang terstruktur, mudah dipahami, dan sesuai dengan kebutuhan pengguna. Saya juga memiliki kemampuan komunikasi serta penggunaan aplikasi perkantoran untuk mendukung pekerjaan dan kolaborasi.</p>
+        </div>
+        <div class="stat-grid">
+          <div class="stat"><strong>6</strong><span>Proyek pilihan</span></div>
+          <div class="stat"><strong>Web + IoT</strong><span>Area eksplorasi</span></div>
+          <div class="stat"><strong>3.78</strong><span>IPK</span></div>
+          <div class="stat"><strong>PWA</strong><span>Pengembangan aplikasi</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="section-kicker">Proyek Pilihan</div><h2 class="section-title">Karya dan pengalaman pengembangan.</h2></div>
+        <p class="section-desc">Ringkasan proyek yang menggambarkan pengalaman dalam membangun sistem web, aplikasi mobile, dan prototipe perangkat.</p>
+      </div>
+      <div class="projects">
+        <article class="project">
+          <div class="project-top"><div class="project-icon">GCI</div><span class="tag">Web / PWA</span></div>
+          <h3>Sistem Inventory & Laporan Harian — PT GCI</h3>
+          <p>Aplikasi yang saya kembangkan dan telah digunakan oleh PT GCI untuk mendukung pencatatan laporan operasional harian serta persediaan bahan baku.</p>
+          <ul>
+            <li>Fitur login, input dan pengelolaan laporan, serta pencatatan persediaan.</li>
+            <li>Rekap berdasarkan jenis data dan bulan, serta ekspor laporan ke PDF.</li>
+            <li>Integrasi Supabase dan penyimpanan lokal melalui IndexedDB.</li>
+          </ul>
+          <div class="chips"><span class="chip">JavaScript</span><span class="chip">Supabase</span><span class="chip">IndexedDB</span><span class="chip">PWA</span></div>
+          <div class="project-links"><a href="https://ptgcidailyreports.netlify.app/" target="_blank" rel="noopener">Buka Aplikasi ↗</a><a href="https://github.com/GilangRisqi/Sistem-Inventory-PT.-GCI.git" target="_blank" rel="noopener">GitHub ↗</a></div>
+<div class="project-gallery" aria-label="Screenshot aplikasi PT GCI">
+            <img src="assets/gci-welcome.png" alt="Halaman sambutan Sistem Daily Report PT GCI" loading="lazy">
+            <img src="assets/gci-login.png" alt="Halaman login aplikasi PT GCI" loading="lazy">
+            <img src="assets/gci-dashboard.png" alt="Tampilan dashboard aplikasi PT GCI" loading="lazy">
+          </div>
+
+        </article>
+        <article class="project">
+          <div class="project-top"><div class="project-icon">RISE</div><span class="tag">Web / Automation</span></div>
+          <h3>RISE Dashboard & News Bot</h3>
+          <p>Proyek yang saya bangun secara mandiri: dashboard dan otomasi berita untuk mendukung aktivitas komunitas serta pemantauan informasi.</p>
+          <ul>
+            <li>Dashboard, panel admin, riwayat sinyal, rekap PDF, dan ekspor gambar.</li>
+            <li>Pengiriman berita terjadwal dengan integrasi Discord.</li>
+            <li>Notifikasi realtime dan web push, serta pencegahan duplikasi.</li>
+          </ul>
+          <div class="chips"><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Supabase</span><span class="chip">Redis</span><span class="chip">Discord</span></div>
+          <div class="project-links"><a href="https://ritelsociety-dashboard.vercel.app/" target="_blank" rel="noopener">Buka Dashboard ↗</a><a href="https://github.com/AgiLano" target="_blank" rel="noopener">GitHub ↗</a></div>
+<div class="project-gallery" aria-label="Screenshot RISE Dashboard">
+            <img src="assets/rise-login.png" alt="Halaman login RISE" loading="lazy">
+            <img src="assets/rise-dashboard.png" alt="Tampilan RISE Dashboard" loading="lazy">
+            <img src="assets/rise-admin.png" alt="Panel admin RISE" loading="lazy">
+            <img src="assets/rise-history.png" alt="Halaman riwayat dan rekap RISE" loading="lazy">
+          </div>
+
+        </article>
+        <article class="project">
+          <div class="project-top"><div class="project-icon">MEWS</div><span class="tag">Akademik / Mobile</span></div>
+          <h3>Sistem Deteksi Dini Pasien Hipertensi</h3>
+          <p>Proyek skripsi berupa rancangan sistem deteksi dini pasien rawat jalan penderita hipertensi berbasis mobile.</p>
+          <ul>
+            <li>Adaptasi Modified Early Warning Score (MEWS).</li>
+            <li>Fokus pada tekanan darah sistolik, denyut jantung, dan frekuensi pernapasan.</li>
+            <li>Rancangan aplikasi Android, arsitektur, alur aktivitas, dan basis data.</li>
+          </ul>
+          <div class="chips"><span class="chip">React Native</span><span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">MEWS</span></div>
+          <div class="project-links"><span class="muted-link">Proyek akademik</span></div>
+<div class="project-gallery" aria-label="Screenshot aplikasi skripsi deteksi dini hipertensi">
+            <img src="assets/mews-login.jpeg" alt="Tampilan masuk aplikasi deteksi dini hipertensi" loading="lazy">
+            <img src="assets/mews-input.jpeg" alt="Form input data kesehatan untuk perhitungan MEWS" loading="lazy">
+            <img src="assets/mews-history.jpeg" alt="Riwayat pemantauan dan kategori risiko MEWS" loading="lazy">
+            <img src="assets/mews-guide.jpeg" alt="Panduan pengukuran parameter kesehatan" loading="lazy">
+            <img src="assets/mews-profile.jpeg" alt="Halaman profil pengguna aplikasi" loading="lazy">
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-top"><div class="project-icon">IoT</div><span class="tag">Hardware / IoT</span></div>
+          <h3>Prototipe Pengujian Kualitas Oli Berbasis ESP32</h3>
+          <p>Prototipe pemantauan kondisi oli menggunakan sensor dan indikator untuk mengelompokkan tingkat kelayakan.</p>
+          <ul>
+            <li>Integrasi ESP32, sensor LDR dan pH, LED RGB, serta LCD I2C.</li>
+            <li>Pengaturan ambang pembacaan dan status kondisi.</li>
+            <li>Pemantauan melalui Blynk IoT.</li>
+          </ul>
+          <div class="chips"><span class="chip">ESP32</span><span class="chip">LDR</span><span class="chip">pH Sensor</span><span class="chip">Blynk IoT</span></div>
+          <div class="project-links"><span class="muted-link">Prototipe IoT</span></div>
+<div class="project-gallery" aria-label="Dokumentasi prototipe pengujian kualitas oli ESP32">
+            <img src="assets/oil-test-field.jpeg" alt="Uji coba prototipe pengujian oli pada sepeda motor" loading="lazy">
+            <img src="assets/oil-test-demo.jpeg" alt="Prototipe sensor dan indikator pada wadah pengujian" loading="lazy">
+            <img src="assets/oil-test-circuit.jpeg" alt="Rangkaian ESP32, sensor, dan LCD pada prototipe" loading="lazy">
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-top"><div class="project-icon">°C</div><span class="tag">Embedded / Arduino</span></div>
+          <h3>Alat Pemanggang Kue Pancong dengan Sensor Suhu dan Timer Otomatis</h3>
+          <p>Prototipe alat pemanggang kue pancong berbasis Arduino Uno yang menggabungkan pembacaan suhu dan pengaturan waktu proses.</p>
+          <ul>
+            <li>Menggunakan termokopel Type-K dan modul MAX6675 untuk membaca suhu.</li>
+            <li>LCD I2C 16×2 menampilkan suhu, mode pemanggangan, dan hitung mundur.</li>
+            <li>Pilihan tingkat kematangan Setengah, Sedang, dan Sempurna serta timer 3, 4, atau 5 menit; buzzer memberi tanda saat proses selesai.</li>
+          </ul>
+          <div class="chips"><span class="chip">Arduino Uno</span><span class="chip">Type-K</span><span class="chip">MAX6675</span><span class="chip">LCD I2C</span><span class="chip">Buzzer</span></div>
+          <div class="project-links"><span class="muted-link">Prototipe embedded system</span></div>
+          <div class="project-gallery" aria-label="Dokumentasi prototipe alat pemanggang kue pancong">
+            <img src="assets/pancong-prototype-finished.jpeg" alt="Tampilan LCD saat proses pemanggangan selesai" loading="lazy">
+            <img src="assets/pancong-prototype-buttons.jpeg" alt="Rangkaian Arduino dan tombol pengaturan" loading="lazy">
+            <img src="assets/pancong-prototype-temperature.jpeg" alt="LCD menampilkan suhu dan status siap mulai" loading="lazy">
+            <img src="assets/pancong-prototype-operation.jpeg" alt="Uji coba alat pemanggang dengan tampilan suhu dan timer" loading="lazy">
+          </div>
+        </article>
+        <article class="project">
+          <div class="project-top"><div class="project-icon">V</div><span class="tag">IoT / Monitoring</span></div>
+          <h3>Prototipe Monitoring Aki Sepeda Motor Berbasis IoT</h3>
+          <p>Proyek monitoring tegangan aki sepeda motor untuk membantu mendeteksi kondisi tegangan rendah.</p>
+          <ul>
+            <li>Fokus pada pemantauan tegangan aki dan indikasi tegangan rendah.</li>
+            <li>Dirancang sebagai prototipe berbasis Internet of Things (IoT).</li>
+            <li>Menggunakan mikrokontroler, rangkaian pemantau tegangan, dan indikator digital untuk memperlihatkan hasil pengukuran selama pengujian.</li>
+          </ul>
+          <div class="chips"><span class="chip">IoT</span><span class="chip">Battery Voltage</span><span class="chip">Low-Voltage Detection</span></div>
+          <div class="project-links"><span class="muted-link">Proyek prototipe</span></div>
+<div class="project-gallery" aria-label="Dokumentasi prototipe monitoring tegangan aki sepeda motor">
+            <img src="assets/aki-prototype-setup.jpeg" alt="Rangkaian prototipe monitoring tegangan aki" loading="lazy">
+            <img src="assets/aki-prototype-display.jpeg" alt="Tampilan LCD monitoring aki" loading="lazy">
+            <img src="assets/aki-prototype-test.jpeg" alt="Pengujian prototipe monitoring aki" loading="lazy">
+          </div>
+
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="section-kicker">Keahlian</div><h2 class="section-title">Tools dan teknologi.</h2></div>
+        <p class="section-desc">Teknologi dan kemampuan yang digunakan atau dieksplorasi dalam proyek.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="panel skill-group"><h3>Web & Aplikasi</h3><div class="chips"><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Next.js</span><span class="chip">React Native</span><span class="chip">Bootstrap</span><span class="chip">PWA</span></div></div>
+        <div class="panel skill-group"><h3>Database & Deployment</h3><div class="chips"><span class="chip">Supabase</span><span class="chip">PostgreSQL</span><span class="chip">SQL</span><span class="chip">IndexedDB</span><span class="chip">GitHub</span><span class="chip">Vercel</span><span class="chip">Redis</span></div></div>
+        <div class="panel skill-group"><h3>IoT & Hardware</h3><div class="chips"><span class="chip">ESP32</span><span class="chip">Sensor Integration</span><span class="chip">LCD I2C</span><span class="chip">Blynk IoT</span></div></div>
+        <div class="panel skill-group"><h3>Produktivitas</h3><div class="chips"><span class="chip">Microsoft Word</span><span class="chip">Microsoft Excel</span><span class="chip">PowerPoint</span></div></div>
+        <div class="panel skill-group"><h3>Kreatif</h3><div class="chips"><span class="chip">CapCut</span><span class="chip">Video Editing</span></div></div>
+        <div class="panel skill-group"><h3>Profesional</h3><div class="chips"><span class="chip">Komunikasi lisan</span><span class="chip">Penyampaian informasi</span><span class="chip">Interpersonal</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="container">
+      <div class="section-head">
+        <div><div class="section-kicker">Pendidikan & Sertifikasi</div><h2 class="section-title">Latar belakang.</h2></div>
+      </div>
+      <div class="timeline">
+        <div class="panel timeline-item">
+          <strong>Universitas Islam Syekh-Yusuf Tangerang</strong>
+          <span>S1 Teknik Informatika · 2022–2026</span>
+          <p style="margin:10px 0 0;color:var(--muted)">Sarjana Komputer (S.Kom.) · IPK 3,78</p>
+          <p style="margin:8px 0 0;color:var(--muted)"><strong>Skripsi:</strong> Perancangan Sistem Deteksi Dini Pasien Rawat Jalan pada Penderita Hipertensi Berbasis Mobile.</p>
+        </div>
+        <div class="panel timeline-item">
+          <strong>Advanced Office Operator</strong>
+          <span>LSP Syekh-Yusuf · Skema sertifikasi BNSP</span>
+          <p style="margin:10px 0 0;color:var(--muted)">Sertifikat Kompetensi BNSP untuk bidang Pengoperasian Komputer, kualifikasi Operator Perkantoran Tingkat Lanjut.</p>
+          <p style="margin:8px 0 0;color:var(--muted);font-size:.85rem">Diterbitkan 25 September 2026 · Berlaku 3 tahun hingga 25 September 2029.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact">
+        <div><h2>Mari terhubung.</h2><p>Terbuka untuk kesempatan kerja di bidang IT maupun peran lain yang selaras dengan kemampuan teknis, komunikasi, dan produktivitas.</p></div>
+        <div class="contact-links">
+          <a href="mailto:agilanoihertiansyah01@gmail.com">Email</a>
+          <a href="https://wa.me/6289506105922" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://www.instagram.com/agilanoihertiansyah/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.linkedin.com/in/agi-lano-i-hertiansyah-1b6741170/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/AgiLano" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="container">© <span id="year"></span> Agi Lano I'Hertiansyah · Portfolio</div></footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
